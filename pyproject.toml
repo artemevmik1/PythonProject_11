@@ -23,3 +23,11 @@ lint = [
     "flake8 (>=7.3.0,<8.0.0)",
     "isort (>=8.0.1,<9.0.0)"
 ]
+dev = [
+    "pytest (>=9.1.1,<10.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)"
+]
+
+[tool.flake8]
+max-line-length = 133
+extend-ignore = ["E203", "W503", "E501"]  # E501 игнорирует длину строк
