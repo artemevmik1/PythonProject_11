@@ -18,9 +18,7 @@ def filter_by_currency(
             yield transaction
 
 
-def transaction_descriptions(
-    transactions: List[Dict[str, Any]],
-) -> Iterator[Dict[str, Any]]:
+def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[Dict[str, Any]]:
     """
     Генератор, который поочередно выдает описания транзакций.
     """

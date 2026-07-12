@@ -1,7 +1,9 @@
+from src.decorators import my_function
+
 from src.generators import (
     card_number_generator,
     filter_by_currency,
-    transaction_descriptions,
+    transaction_descriptions
 )
 
 transactions = [
@@ -81,3 +83,9 @@ if __name__ == "__main__":
     card_number = card_number_generator(1, 5)
     for card in card_number:
         print(card)
+
+    print('\n#########\n')
+
+    my_function('3', 2)
+
+
