@@ -7,7 +7,8 @@ authors = [
 ]
 requires-python = "^3.14"
 dependencies = [
-    "requests (>=2.34.2,<3.0.0)"
+    "requests (>=2.34.2,<3.0.0)",
+    "python-dotenv (>=1.2.2,<2.0.0)"
 ]
 
 
@@ -29,5 +30,5 @@ dev = [
 ]
 
 [tool.flake8]
-max-line-length = 133
+max-line-length = 150
 extend-ignore = ["E203", "W503", "E501"]  # E501 игнорирует длину строк

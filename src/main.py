@@ -1,4 +1,8 @@
 from src.decorators import my_function
+import json
+from src.utils import read_transaction_json, convert_to_rubles
+from config import operations_json
+
 
 from src.generators import (
     card_number_generator,
@@ -86,6 +90,16 @@ if __name__ == "__main__":
 
     print('\n#########\n')
 
-    my_function('3', 2)
+    #my_function(3, 2)
+
+    transactions = read_transaction_json(operations_json)
+    print(transactions)
+
+    for transaction in transactions:
+        convert_rubles = convert_to_rubles(transaction)
+        print(convert_rubles)
+
+
+
 
 

@@ -190,7 +190,6 @@ def test_log_success_file(log_file_name):
 
 
 
-
 def test_log_error_console(capsys):
     """Тест: обработка ошибки с выводом в консоль."""
 
