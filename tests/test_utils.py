@@ -57,11 +57,12 @@ def test_read_file_not_found():
     assert result == []
 
 
+
 @patch("src.external_api.requests.get")
 def test_get_exchange_rate(mock_get):
     mock_response = Mock()
-    mock_response.json.return_value = {'success': True, 'result': 80}
-    mock_response.raise_for_status.return_value = None
+    mock_response.json.return_value = {'success': True, 'rates': {'RUB': 80}}
+    #mock_response.raise_for_status.return_value = None
     mock_get.return_value = mock_response
     result = get_exchange_rate("EUR")
 
