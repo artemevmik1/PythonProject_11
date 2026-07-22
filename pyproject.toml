@@ -30,5 +30,56 @@ dev = [
 ]
 
 [tool.flake8]
-max-line-length = 150
-extend-ignore = ["E203", "W503", "E501"]  # E501 игнорирует длину строк
+max-line-length = 119
+extend-ignore = ["E203", "W503, E501"]
+exclude = [".venv", "__pycache__", "build", "dist"]
+extend-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+
+
+[tool.black]
+line-length = 119
+target-version = ['py314']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.isort]
+profile = "black"
+max-line_length = 119
+multi_line_output = 3
+
+
+[tool.poetry.scripts]
+lint = "flake8 ."
+format = "black ."
+sort-imports = "isort ."
+check-all = "flake8 . && mypy . && black --check ."

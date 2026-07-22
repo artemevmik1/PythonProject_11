@@ -1,14 +1,7 @@
-from src.decorators import my_function
-import json
 from src.utils import read_transaction_json, convert_to_rubles
 from config import operations_json
-
-
-from src.generators import (
-    card_number_generator,
-    filter_by_currency,
-    transaction_descriptions
-)
+from src.generators import (card_number_generator,
+                            filter_by_currency, transaction_descriptions)
 
 transactions = [
     {
@@ -88,18 +81,11 @@ if __name__ == "__main__":
     for card in card_number:
         print(card)
 
-    print('\n#########\n')
+    print("\n#########\n")
 
-    #my_function(3, 2)
-
-    transactions = read_transaction_json(operations_json)
+    transactions = read_transaction_json(str(operations_json))
     print(transactions)
 
     for transaction in transactions:
         convert_rubles = convert_to_rubles(transaction)
         print(convert_rubles)
-
-
-
-
-

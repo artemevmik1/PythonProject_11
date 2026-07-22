@@ -98,5 +98,3 @@ def transactions_without_currency():
 def log_file_name():
     """Фикстура с именем тестового лог-файла."""
     return "mylog.txt"
-
-

@@ -1,9 +1,8 @@
 from typing import Any, Dict, Iterator, List
 
 
-def filter_by_currency(
-    transactions: List[Dict[str, Any]], currency_code: str
-) -> Iterator[Dict[str, Any]]:
+def filter_by_currency(transactions: List[Dict[str, Any]],
+                       currency_code: str) -> Iterator[Dict[str, Any]]:
     """
     Фильтрует транзакции по заданной валюте.
     """
@@ -13,12 +12,14 @@ def filter_by_currency(
         if (
             transaction.get("operationAmount", {})
             and transaction["operationAmount"].get("currency", {})
-            and transaction["operationAmount"]["currency"].get("code") == currency_code
+            and transaction["operationAmount"]["currency"].get("code")
+                == currency_code
         ):
             yield transaction
 
 
-def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[Dict[str, Any]]:
+def transaction_descriptions(transactions: List[Dict[str, Any]]) \
+        -> Iterator[Dict[str, Any]]:
     """
     Генератор, который поочередно выдает описания транзакций.
     """
@@ -40,5 +41,6 @@ def card_number_generator(start: int, end: int) -> Iterator[str]:
 
     for number in range(start, end + 1):
         format = f"{number:016d}"
-        card_number = f"{format[:4]} {format[4:8]} " f"{format[8:12]} {format[-4:]}"
+        card_number = f"{format[:4]} {format[4:8]} " \
+                      f"{format[8:12]} {format[-4:]}"
         yield card_number
