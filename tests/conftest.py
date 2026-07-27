@@ -92,3 +92,9 @@ def transactions_without_currency():
             "description": "Транзакция без operationAmount",
         },
     ]
+
+
+@pytest.fixture
+def log_file_name():
+    """Фикстура с именем тестового лог-файла."""
+    return "mylog.txt"

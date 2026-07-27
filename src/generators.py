@@ -1,9 +1,7 @@
 from typing import Any, Dict, Iterator, List
 
 
-def filter_by_currency(
-    transactions: List[Dict[str, Any]], currency_code: str
-) -> Iterator[Dict[str, Any]]:
+def filter_by_currency(transactions: List[Dict[str, Any]], currency_code: str) -> Iterator[Dict[str, Any]]:
     """
     Фильтрует транзакции по заданной валюте.
     """
@@ -18,9 +16,7 @@ def filter_by_currency(
             yield transaction
 
 
-def transaction_descriptions(
-    transactions: List[Dict[str, Any]],
-) -> Iterator[Dict[str, Any]]:
+def transaction_descriptions(transactions: List[Dict[str, Any]]) -> Iterator[Dict[str, Any]]:
     """
     Генератор, который поочередно выдает описания транзакций.
     """

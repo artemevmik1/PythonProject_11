@@ -1,12 +1,26 @@
+import os
+
 import pytest
 
+from src.decorators import log
 from src.generators import (
     card_number_generator,
     filter_by_currency,
     transaction_descriptions,
 )
 
+
+@log(filename="log_test.txt")
+def my_function(x, y):
+    """Выполняет суммирование двух чисел."""
+    for i in range(100000000):
+        continue
+    return x + y
+
+
 # Тестирование функции "test_filter_usd_success"
+
+my_function(2, 5)
 
 
 def test_filter_usd_success(sample_transactions):
@@ -136,15 +150,76 @@ def test_invalid_start_less_than_one():
 
 def test_invalid_end_greater_than_max():
     """Тест: end больше максимального значения."""
-    with pytest.raises(
-        ValueError, match="Конечное значение должно быть <= 9999999999999999"
-    ):
+    with pytest.raises(ValueError, match="Конечное значение должно " "быть <= 9999999999999999"):
         list(card_number_generator(1, 10000000000000000))
 
 
 def test_invalid_start_greater_than_end():
     """Тест: start больше end."""
-    with pytest.raises(
-        ValueError, match="Начальное значение не может быть больше конечного"
-    ):
+    with pytest.raises(ValueError, match="Начальное значение " "не может быть больше конечного"):
         list(card_number_generator(10, 5))
+
+
+print("\n#########\n")
+
+
+def test_log_success_console(capsys):
+    """Тест: успешное выполнение функции с выводом в консоль."""
+
+    @log()
+    def my_function(a, b):
+        return a + b
+
+    result = my_function(2, 3)
+    assert result == 5
+
+    # Перехватываем вывод в консоль
+    captured = capsys.readouterr()
+    assert "my_function started" in captured.out
+    assert "Getting started:" in captured.out
+    assert "my_function finished" in captured.out
+    assert "End of work:" in captured.out
+    assert "Time for work:" in captured.out
+    assert "Result:" in captured.out
+    assert "Переданные аргументы" in captured.out
+
+
+def test_log_success_file(log_file_name):
+    """Тест: успешное выполнение функции с записью в файл."""
+
+    @log(filename=log_file_name)
+    def my_function(a, b):
+        return a + b
+
+    result = my_function(4, 5)
+    assert result == 9
+
+    assert os.path.exists(log_file_name)
+
+
+def test_log_error_console(capsys):
+    """Тест: обработка ошибки с выводом в консоль."""
+
+    @log()
+    def my_function(a, b):
+        return a + b
+
+    with pytest.raises(Exception, match="Type error"):
+        my_function("4", 5)
+
+    captured = capsys.readouterr()
+    assert "my_function error: TypeError" in captured.out
+
+
+def test_log_error_file(log_file_name):
+    """Тест: обработка ошибки с записью в файл."""
+
+    @log(filename=log_file_name)
+    def my_function(a, b):
+        return a + b
+
+    with pytest.raises(Exception, match="Type error"):
+        my_function(5, "2")
+
+    # Проверяем, что файл существует и содержит логи ошибки
+    assert os.path.exists(log_file_name)
