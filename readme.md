@@ -48,6 +48,7 @@
 ## 📋 Содержание
 
 - [Описание](#описание)
+- [Логирование](#логирование)
 - [Установка](#установка)
 - [Функции](#функции)
   - [read_transaction_json](#read_transaction_json)
@@ -71,6 +72,25 @@
 
 
 API_KEY=ваш_ключ_доступа_к_API
+
+
+## Логирование
+В проекте настроено логирование с перезаписью файла при каждом запуске. Это позволяет:
+- Отслеживать выполнение всех функций
+- Фиксировать ошибки и исключения
+- Анализировать параметры, переданные в функции
+- Видеть результат выполнения операций
+
+### Настройка логгера
+import logging
+
+logger = logging.getLogger("masks")
+logger.setLevel(logging.INFO)
+file_handler = logging.FileHandler("logs/masks.log", encoding="utf-8", mode='w')
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(message)s")
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
+
 
 
 ## Функции
