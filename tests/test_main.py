@@ -1,5 +1,7 @@
-import pytest
 import os
+
+import pytest
+
 from src.decorators import log
 from src.generators import (
     card_number_generator,
@@ -142,24 +144,19 @@ def test_generator_exhaustion():
 
 def test_invalid_start_less_than_one():
     """Тест: start меньше 1."""
-    with pytest.raises(ValueError,
-                       match="Начальное значение должно быть >= 1"):
+    with pytest.raises(ValueError, match="Начальное значение должно быть >= 1"):
         list(card_number_generator(0, 100))
 
 
 def test_invalid_end_greater_than_max():
     """Тест: end больше максимального значения."""
-    with pytest.raises(ValueError,
-                       match="Конечное значение должно "
-                             "быть <= 9999999999999999"):
+    with pytest.raises(ValueError, match="Конечное значение должно " "быть <= 9999999999999999"):
         list(card_number_generator(1, 10000000000000000))
 
 
 def test_invalid_start_greater_than_end():
     """Тест: start больше end."""
-    with pytest.raises(ValueError,
-                       match="Начальное значение "
-                             "не может быть больше конечного"):
+    with pytest.raises(ValueError, match="Начальное значение " "не может быть больше конечного"):
         list(card_number_generator(10, 5))
 
 

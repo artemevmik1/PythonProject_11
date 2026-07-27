@@ -1,25 +1,16 @@
 import json
 import os
 import tempfile
-from src.utils import read_transaction_json, convert_to_rubles
+from unittest.mock import Mock, patch
+
 from src.external_api import get_exchange_rate
-from unittest.mock import patch, Mock
+from src.utils import convert_to_rubles, read_transaction_json
 
 
 def test_read_valid_json_file():
     """Тест: чтение валидного JSON-файла со списком транзакций."""
-    test_transaction = {
-        "id": 1,
-        "operationAmount": {
-            "amount": "100.00",
-            "currency": {
-                "name": "USD",
-                "code": "USD"
-            }
-        }
-    }
-    with tempfile.NamedTemporaryFile(mode="w",
-                                     suffix=".json", delete=False) as f:
+    test_transaction = {"id": 1, "operationAmount": {"amount": "100.00", "currency": {"name": "USD", "code": "USD"}}}
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
         json.dump([test_transaction], f)
         f.flush()
         file_path = f.name
@@ -31,8 +22,7 @@ def test_read_valid_json_file():
 
 def test_read_empty_json_file():
     """Тест: чтение пустого JSON-файла."""
-    with tempfile.NamedTemporaryFile(mode="w",
-                                     suffix=".json", delete=False) as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
         f.write("")
         f.flush()
         file_path = f.name
@@ -44,8 +34,7 @@ def test_read_empty_json_file():
 
 def test_read_not_list_json():
     """Тест: JSON-файл содержит не список."""
-    with tempfile.NamedTemporaryFile(mode="w",
-                                     suffix=".json", delete=False) as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
         json.dump({"key": "value"}, f)
         f.flush()
         file_path = f.name

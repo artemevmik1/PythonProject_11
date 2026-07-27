@@ -1,4 +1,5 @@
 import os
+
 import requests
 from dotenv import load_dotenv
 
@@ -12,11 +13,9 @@ def get_exchange_rate(from_currency: str) -> float:
     Получает текущий курс валюты к рублю через внешнее API.
     """
     if not API_KEY:
-        raise ValueError("API_KEY для Exchange Rates Data "
-                         "API не задан в переменных окружения.")
+        raise ValueError("API_KEY для Exchange Rates Data " "API не задан в переменных окружения.")
 
-    url = (f"https://api.apilayer.com/exchangerates_data/"
-           f"latest?symbols=RUB&base={from_currency}")
+    url = f"https://api.apilayer.com/exchangerates_data/" f"latest?symbols=RUB&base={from_currency}"
 
     headers = {"apikey": f"{API_KEY}"}
 
@@ -27,8 +26,7 @@ def get_exchange_rate(from_currency: str) -> float:
 
         # Проверяем успешность ответа
         if not data.get("success", False):
-            raise ValueError(f"Ошибка при получении "
-                             f"курса валют{response.raise_for_status}")
+            raise ValueError(f"Ошибка при получении " f"курса валют{response.raise_for_status}")
 
         rate = data["rates"]["RUB"]
         return float(rate)
@@ -36,5 +34,4 @@ def get_exchange_rate(from_currency: str) -> float:
     except requests.RequestException as e:
         raise ValueError(f"Не удалось выполнить запрос к API: {e}")
     except KeyError:
-        raise ValueError("Некорректный ответ от API: "
-                         "отсутствует курс валюты.")
+        raise ValueError("Некорректный ответ от API: " "отсутствует курс валюты.")

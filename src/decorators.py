@@ -17,12 +17,14 @@ def log(filename=None):
                 time_start = time.time()
                 result = func(*args, **kwargs)
                 time_end = time.time()
-                log_message = (f"{func.__name__} started\nGetting started: "
-                               f"{time_start}\n{func.__name__} finished\n"
-                               f"End of work: {time_end}\n"
-                               f"Time for work: {time_end - time_start}\n"
-                               f"Result: {result},\n"
-                               f"Переданные аргументы {args}, {kwargs}\n\n")
+                log_message = (
+                    f"{func.__name__} started\nGetting started: "
+                    f"{time_start}\n{func.__name__} finished\n"
+                    f"End of work: {time_end}\n"
+                    f"Time for work: {time_end - time_start}\n"
+                    f"Result: {result},\n"
+                    f"Переданные аргументы {args}, {kwargs}\n\n"
+                )
                 if filename:
                     with open(filename, "a", encoding="utf-8") as file:
                         file.write(log_message)
@@ -30,9 +32,7 @@ def log(filename=None):
                     print(log_message)
                 return result
             except Exception as e:
-                log_message_error = (f"{func.__name__} error:"
-                                     f" {type(e).__name__}. Inputs:"
-                                     f" {args},{kwargs}\n")
+                log_message_error = f"{func.__name__} error:" f" {type(e).__name__}. Inputs:" f" {args},{kwargs}\n"
 
                 if filename:
                     with open(filename, "a", encoding="utf-8") as file:
