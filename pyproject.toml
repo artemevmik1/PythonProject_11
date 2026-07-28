@@ -26,28 +26,9 @@ lint = [
 ]
 dev = [
     "pytest (>=9.1.1,<10.0.0)",
-    "pytest-cov (>=7.1.0,<8.0.0)"
+    "pytest-cov (>=7.1.0,<8.0.0)",
+    "flake8 (>=7.3.0,<8.0.0)"
 ]
-
-[tool.flake8]
-max-line-length = 119
-extend-ignore = ["E203", "W503, E501"]
-exclude = [".venv", "__pycache__", "build", "dist"]
-extend-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
-
 
 
 [tool.black]
