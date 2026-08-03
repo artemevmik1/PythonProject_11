@@ -6,9 +6,13 @@ authors = [
     {name = "Arteemyev Mikhail",email = "artemevmik1@rambler.ru"}
 ]
 requires-python = "^3.14"
+
 dependencies = [
     "requests (>=2.34.2,<3.0.0)",
-    "python-dotenv (>=1.2.2,<2.0.0)"
+    "python-dotenv (>=1.2.2,<2.0.0)",
+    "pandas-stubs (>=3.0.5,<3.1.0)",
+    "pandas (>=3.0.5,<4.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)"
 ]
 
 
