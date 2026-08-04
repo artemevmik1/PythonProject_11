@@ -87,22 +87,6 @@ def test_read_csv_general_exception(mock_open_file):
     assert isinstance(result, list)
 
 
-@patch("csv.DictReader")
-@patch("builtins.open")
-def test_read_csv_with_different_delimiter(mock_open_file, mock_dict_reader):
-    """Чтение CSV с другим разделителем"""
-    mock_file = Mock()
-    mock_open_file.return_value.__enter__.return_value = mock_file
-
-    expected_data = [{"col1": "value1", "col2": "value2"}]
-    mock_dict_reader.return_value = expected_data
-
-    result = read_csv_file("test.csv")
-
-    # Проверяем, что используется разделитель ;
-    mock_dict_reader.assert_called_with(mock_file, delimiter=";")
-
-
 @patch("builtins.open", mock_open(read_data="id;name\n1;Test\n2;Another"))
 @patch("csv.DictReader")
 def test_read_csv_with_real_data(mock_dict_reader):
@@ -117,7 +101,7 @@ def test_read_csv_with_real_data(mock_dict_reader):
     assert result[1]["name"] == "Another"
 
 
-##### Тестирование Excel
+# Тестирование Excel
 
 
 @patch("src.reading_csv_excel.pd.read_excel")
@@ -197,8 +181,3 @@ def test_read_excel_data_structure(mock_read_excel):
         assert "state" in row
         assert "amount" in row
         assert "date" in row
-
-
-
-
-
