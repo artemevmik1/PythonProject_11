@@ -54,6 +54,8 @@
   - [read_transaction_json](#read_transaction_json)
   - [convert_to_rubles](#convert_to_rubles)
   - [get_exchange_rate](#get_exchange_rate)
+  - [read_csv_file](#read_transaction_json)
+  - [read_excel_file](#read_transaction_json)
 - [Примеры использования](#примеры-использования)
 - [Тестирование](#тестирование)
 - [Требования](#требования)
@@ -67,6 +69,7 @@
 1. **`read_transaction_json`** — чтение и фильтрация транзакций из JSON-файла
 2. **`convert_to_rubles`** — конвертация суммы транзакции в рубли
 3. **`get_exchange_rate`** — получение текущего курса валюты через внешнее API
+4. **`reading_csv_excel.py `** — Функции чтения файлов
 
 Все функции используют аннотации типов и обрабатывают возможные ошибки.
 
@@ -91,6 +94,16 @@ file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s: %(me
 file_handler.setFormatter(file_formatter)
 logger.addHandler(file_handler)
 
+### Основные возможности
+1. **Чтение CSV файлов**
+   - Поддержка разделителя `;`
+   - Автоматическое определение заголовков
+   - Обработка ошибок (файл не найден, поврежденный файл)
+
+2. **Чтение Excel файлов**
+   - Поддержка форматов `.xlsx` и `.xls`
+   - Преобразование данных в список словарей
+   - Обработка пропущенных значений (NaN → None)
 
 
 ## Функции
@@ -154,11 +167,15 @@ PythonProject_11/
 │   ├── __init__.py
 │   ├── utils.py          # read_transaction_json
 │   └── external_api.py   # convert_to_rubles, get_exchange_rate
+│   ├── reading_csv_excel.py    # Функции чтения файлов
 ├── data/
 │   └── operations.json   # Файл с транзакциями
+    ├── transactions.csv             # Пример CSV данных
+│   └── transactions_excel.xlsx      # Пример Excel данных
 ├── tests/
 │   ├── __init__.py
 │   └── test_utils.py
+    └── test_reading_csv_excel.py    # Тесты
 ├── .env                  # Переменные окружения (не в Git)
 ├── .env.example          # Шаблон .env (в Git)
 ├── pyproject.toml

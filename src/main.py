@@ -1,4 +1,4 @@
-from config import operations_json
+from config import filename_csv, filename_excel, operations_json
 from src.generators import (
     card_number_generator,
     filter_by_currency,
@@ -6,6 +6,7 @@ from src.generators import (
 )
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
+from src.reading_csv_excel import read_csv_file, read_excel_file
 from src.utils import convert_to_rubles, read_transaction_json
 from src.widget import get_date, get_datee, mask_account_card
 
@@ -119,3 +120,13 @@ if __name__ == "__main__":
     for transaction in transactions:
         convert_rubles = convert_to_rubles(transaction)
         print(convert_rubles)
+
+    print("\n#########\n" + "\nДомашняя работа 13.1\n\n")
+
+    file_csv = read_csv_file(str(filename_csv))
+    print(file_csv)
+
+    print("\n#########\n" + "\nДомашняя работа 13.1_excel\n\n")
+
+    result_file_excel = read_excel_file(filename_excel)
+    print(result_file_excel)
