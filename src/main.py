@@ -1,4 +1,4 @@
-from typing import Any, Dict, Iterator, List
+from typing import Any, Dict, Iterator, List, Generator
 
 from config import filename_csv, filename_excel, operations_json
 from src.filters import format_transaction_for_display, process_bank_search
@@ -128,6 +128,8 @@ def ask_question_user(question: str) -> bool:
             print("Пожалуйста, ответьте 'Да' или 'Нет'")
 
 
+
+
 def print_transactions(transactions_finish: List[Dict[str, Any]] | Iterator[dict[str, Any]]) -> None:
     """
     Выводит транзакции в консоль.
@@ -201,6 +203,9 @@ def main() -> None:
             filtered_transactions = process_bank_search(filtered_transactions, search_word)
             print(f"Отфильтровано по слову '{search_word}'")
 
+    if isinstance(filtered_transactions, Generator):
+        filtered_transactions = list(filtered_transactions)
+
     # Подсчет по категориям
     if filtered_transactions:
         categories = [
@@ -219,6 +224,11 @@ def main() -> None:
     # Вывод результатов
     print("\nРаспечатываю итоговый список транзакций...")
     print_transactions(filtered_transactions)
+
+
+
+
+
 
 
 if __name__ == "__main__":
